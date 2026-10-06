@@ -129,7 +129,7 @@ export default function DashboardView({ secretToken }: { secretToken?: string })
       revenueGrowthRate,
       totalCustomers,
       avgTicket,
-      holidayCount: holidayInfo.weekdayCount || holidayInfo.count,
+      holidayCount: holidayInfo.count,
       holidayNames: holidayInfo.holidays.map((h) => `${h.name}(${h.date})`).join(", "),
     };
   }, [salesData, holidaysSummary, latestMonth, prevMonth]);
@@ -147,7 +147,7 @@ export default function DashboardView({ secretToken }: { secretToken?: string })
         총매출액: totalRev,
         총매출_백만원: Math.round(totalRev / 10000) / 100, // 백만원 단위
         총객수: totalCust,
-        공휴일수: holidayInfo.weekdayCount || holidayInfo.count,
+        공휴일수: holidayInfo.count,
         공휴일목록: holidayInfo.holidays.map((h) => `${h.name}(${h.date})`).join(", ") || "공휴일 없음",
       };
     });
@@ -437,7 +437,7 @@ export default function DashboardView({ secretToken }: { secretToken?: string })
                   <Tooltip
                     formatter={(value: any, name: string) => {
                       if (name === "총매출액") return [formatCurrency(Number(value)), "월 총매출"];
-                      if (name === "공휴일수") return [`${value}일`, "평일 공휴일 수"];
+                      if (name === "공휴일수") return [`${value}일`, "법정 공휴일 수"];
                       return [value, name];
                     }}
                     labelFormatter={(label) => {
